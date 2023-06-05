@@ -8,6 +8,9 @@ import {
 import { addToFavorites, getCatsFetch } from "../../features/cat/catState";
 import { CatType } from "../../constants/genericTypes";
 import { Link } from "react-router-dom";
+import ResizableDiv from "../../components/ResizableDiv";
+import Table from "../../components/Table";
+import TableRow from "../../components/TableRow";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -33,6 +36,8 @@ const Home = () => {
 
   return (
     <div className="App">
+      <ResizableDiv>Potato</ResizableDiv>
+
       <h1>CAT SPECIES GALLERY</h1>
       <Link to={"/favorites"}>Favorites</Link>
       <p>
@@ -40,6 +45,22 @@ const Home = () => {
         pleasure.
       </p>
       <hr />
+      <Table
+        firstColumnHeader="Name"
+        secondColumnHeader="Temperament"
+        thirdColumnHeader="Description"
+      >
+        {cats.map((cat: CatType, index) => {
+          return (
+            <TableRow
+              firstColumnRow={cat.name}
+              secondColumnRow={cat.temperament}
+              thirdColumnRow={cat.description}
+              index={index}
+            />
+          );
+        })}
+      </Table>
       <div className="gallery">
         {cats.map((cat: CatType) => (
           <div key={cat.id} className="row">
